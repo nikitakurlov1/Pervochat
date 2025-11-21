@@ -8,3 +8,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
   </React.StrictMode>
 );
+
+// PWA: Реєстрація Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => {
+        console.log('✅ Service Worker зареєстровано:', registration.scope);
+      })
+      .catch((error) => {
+        console.log('❌ Помилка реєстрації Service Worker:', error);
+      });
+  });
+}

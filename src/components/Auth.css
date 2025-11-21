@@ -49,6 +49,7 @@
   border-radius: 12px;
   font-size: 16px;
   transition: all 0.2s ease;
+  min-height: 52px; /* Зручно для мобільних */
 }
 
 .auth-card input:focus {
@@ -67,11 +68,28 @@
   font-weight: 600;
   margin-top: 8px;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  min-height: 52px; /* Зручно для мобільних */
+  transition: all 0.2s ease;
 }
 
-.btn-primary:hover {
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
-  transform: translateY(-1px);
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+@media (min-width: 768px) {
+  .auth-card input,
+  .btn-primary {
+    min-height: auto;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
 }
 
 .btn-link {

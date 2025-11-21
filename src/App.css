@@ -1,28 +1,5 @@
+/* App.css тепер мінімальний, бо Layout керує структурою */
+
 .app {
-  max-width: 500px;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: #ffffff;
-  position: relative;
-  padding-bottom: 70px;
-}
-
-.content {
-  padding: 16px;
-  padding-bottom: 90px;
-}
-
-@media (min-width: 768px) {
-  body {
-    background: #e4e6eb;
-  }
-  
-  .app {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    min-height: calc(100vh - 40px);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-    overflow: hidden;
-  }
+  /* Залишаємо порожнім або видаляємо - Layout керує всім */
 }

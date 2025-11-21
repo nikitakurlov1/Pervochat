@@ -1,3 +1,4 @@
+/* Mobile - Bottom Sheet */
 .comment-sheet-overlay {
   position: fixed;
   top: 0;
@@ -39,6 +40,34 @@
   }
   to {
     transform: translateY(0);
+  }
+}
+
+/* Desktop - Центральне модальне вікно */
+@media (min-width: 768px) {
+  .comment-sheet-overlay {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comment-sheet {
+    border-radius: 16px;
+    max-height: 80vh;
+    max-width: 600px;
+    margin: 0;
+    animation: scaleIn 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 

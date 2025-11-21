@@ -48,7 +48,7 @@
 }
 
 .btn-logout {
-  padding: 8px 12px;
+  padding: 10px 14px;
   background: #f0f2f5;
   color: #65676b;
   border-radius: 8px;
@@ -58,11 +58,24 @@
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
+  min-height: 40px; /* Зручно для мобільних */
+  transition: all 0.2s ease;
 }
 
-.btn-logout:hover {
-  background: #e4e6eb;
-  color: #ef4444;
+.btn-logout:active {
+  transform: scale(0.95);
+}
+
+@media (min-width: 768px) {
+  .btn-logout {
+    padding: 8px 12px;
+    min-height: auto;
+  }
+
+  .btn-logout:hover {
+    background: #e4e6eb;
+    color: #ef4444;
+  }
 }
 
 .profile-stats {
@@ -115,11 +128,27 @@
   font-weight: 600;
   margin-bottom: 20px;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  min-height: 52px; /* Зручно для мобільних */
+  transition: all 0.2s ease;
 }
 
-.btn-trustbox:hover {
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
-  transform: translateY(-1px);
+.btn-trustbox:active {
+  transform: scale(0.98);
+}
+
+@media (min-width: 768px) {
+  .btn-trustbox {
+    min-height: auto;
+  }
+
+  .btn-trustbox:hover {
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-trustbox:active {
+    transform: translateY(0);
+  }
 }
 
 .profile .empty {

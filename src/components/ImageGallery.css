@@ -171,7 +171,8 @@
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
+/* Mobile адаптація */
+@media (max-width: 767px) {
   .btn-prev {
     left: 10px;
   }
@@ -182,5 +183,32 @@
 
   .gallery-counter {
     bottom: 20px;
+  }
+
+  .gallery-three {
+    height: 250px;
+  }
+
+  .gallery-grid {
+    max-height: 300px;
+  }
+}
+
+/* Desktop покращення */
+@media (min-width: 768px) {
+  .gallery-single img {
+    max-height: 500px;
+  }
+
+  .gallery-three {
+    height: 350px;
+  }
+
+  .gallery-grid {
+    max-height: 450px;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.08);
   }
 }

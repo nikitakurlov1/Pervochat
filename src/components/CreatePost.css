@@ -33,7 +33,7 @@
 }
 
 .category-chip {
-  padding: 10px 20px;
+  padding: 12px 20px;
   background: #f0f2f5;
   border-radius: 20px;
   font-size: 14px;
@@ -41,10 +41,28 @@
   color: #65676b;
   white-space: nowrap;
   flex-shrink: 0;
+  min-height: 44px; /* Зручно для мобільних */
+  transition: all 0.2s ease;
 }
 
-.category-chip:hover {
-  background: #e4e6eb;
+.category-chip:active {
+  transform: scale(0.95);
+}
+
+@media (min-width: 768px) {
+  .category-chip {
+    padding: 10px 20px;
+    min-height: auto;
+  }
+
+  .category-chip:hover {
+    background: #e4e6eb;
+    transform: translateY(-1px);
+  }
+
+  .category-chip:active {
+    transform: translateY(0);
+  }
 }
 
 .category-chip.active {
@@ -69,6 +87,13 @@
   background: white;
   border-color: #6366f1;
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+@media (min-width: 768px) {
+  .post-textarea {
+    min-height: 180px;
+    font-size: 15px;
+  }
 }
 
 .image-preview-container {
@@ -340,9 +365,25 @@
   font-size: 16px;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  min-height: 52px; /* Зручно для мобільних */
+  transition: all 0.2s ease;
 }
 
-.btn-submit:hover {
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
-  transform: translateY(-1px);
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+@media (min-width: 768px) {
+  .btn-submit {
+    min-height: auto;
+  }
+
+  .btn-submit:hover {
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-submit:active {
+    transform: translateY(0);
+  }
 }

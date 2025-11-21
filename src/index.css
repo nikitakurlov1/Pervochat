@@ -4,6 +4,24 @@
   box-sizing: border-box;
 }
 
+/* ============================================
+   PWA: Блокування зуму та нативний вигляд
+   ============================================ */
+
+html {
+  /* Блокування зуму через CSS */
+  touch-action: pan-x pan-y;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  
+  /* Відключення elastic scroll (rubber-banding) */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Висота для мобільних (враховує адресну строку) */
+  height: 100%;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', sans-serif;
   background: #f0f2f5;
@@ -11,10 +29,85 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* PWA: Блокування зуму */
+  touch-action: pan-x pan-y;
+  -webkit-touch-callout: none;
+  
+  /* Відключення elastic scroll */
+  overscroll-behavior: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 #root {
   min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+/* ============================================
+   PWA: Відключення виділення для UI елементів
+   ============================================ */
+
+button,
+nav,
+.bottom-nav,
+.mobile-bottom-nav,
+.desktop-header,
+.btn-action,
+.btn-primary,
+.btn-submit,
+.filter-chip,
+.category-chip,
+.nav-icon,
+.header-logo {
+  /* Відключаємо виділення тексту */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  /* Відключаємо затримку double-tap zoom */
+  touch-action: manipulation;
+  
+  /* Відключаємо контекстне меню на довге натискання */
+  -webkit-touch-callout: none;
+  
+  /* Відключаємо highlight при натисканні на iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Дозволяємо виділення тексту в постах та коментарях */
+.post-text,
+.comment-text,
+.message-bubble p,
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* ============================================
+   PWA: Відключення highlight при натисканні
+   ============================================ */
+
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 button {

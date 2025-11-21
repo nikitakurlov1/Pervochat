@@ -1,9 +1,6 @@
 .admin-panel {
-  max-width: 900px;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: #f0f2f5;
-  padding: 20px;
+  /* Layout тепер керує padding та background */
+  padding: 0;
 }
 
 .admin-header {
@@ -234,13 +231,11 @@
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-@media (max-width: 768px) {
-  .admin-panel {
-    padding: 16px;
-  }
-
+/* Mobile адаптація */
+@media (max-width: 767px) {
   .admin-stats {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .admin-header {
@@ -251,5 +246,34 @@
 
   .admin-tabs {
     flex-direction: column;
+    gap: 8px;
+  }
+
+  .admin-title h1 {
+    font-size: 20px;
+  }
+
+  .stat-card-admin .stat-value {
+    font-size: 28px;
+  }
+}
+
+/* Desktop покращення */
+@media (min-width: 768px) {
+  .admin-header {
+    padding: 24px;
+  }
+
+  .admin-content {
+    padding: 24px;
+  }
+
+  .admin-stats {
+    gap: 20px;
+  }
+
+  .admin-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
 }

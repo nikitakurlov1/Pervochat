@@ -5,7 +5,7 @@ import Feed from './components/Feed';
 import CreatePost from './components/CreatePost';
 import Profile from './components/Profile';
 import AdminPanel from './components/AdminPanel';
-import BottomNav from './components/BottomNav';
+import Layout from './components/Layout';
 import './App.css';
 
 function App() {
@@ -20,20 +20,21 @@ function App() {
     return <Auth />;
   }
 
-  // Если админ - показываем админ-панель
+  // Якщо адмін - показуємо адмін-панель без навігації
   if (isAdmin()) {
-    return <AdminPanel />;
+    return (
+      <Layout showNav={false}>
+        <AdminPanel />
+      </Layout>
+    );
   }
 
   return (
-    <div className="app">
-      <div className="content">
-        {activeTab === 'feed' && <Feed />}
-        {activeTab === 'create' && <CreatePost onSuccess={() => setActiveTab('feed')} />}
-        {activeTab === 'profile' && <Profile />}
-      </div>
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-    </div>
+    <Layout activeTab={activeTab} onTabChange={setActiveTab}>
+      {activeTab === 'feed' && <Feed />}
+      {activeTab === 'create' && <CreatePost onSuccess={() => setActiveTab('feed')} />}
+      {activeTab === 'profile' && <Profile />}
+    </Layout>
   );
 }
 
