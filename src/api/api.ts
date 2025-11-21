@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const isProduction = import.meta.env.PROD;
+
 const api = axios.create({
-  baseURL: '/api'
+  baseURL: isProduction ? 'https://pervocha.vercel.app/api' : '/api',
+  withCredentials: true
 });
 
 api.interceptors.request.use((config) => {
