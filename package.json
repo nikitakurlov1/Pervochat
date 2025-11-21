@@ -7,8 +7,10 @@
     "server": "tsx watch server/index.ts",
     "client": "vite",
     "build": "tsc && vite build",
+    "vercel-build": "prisma generate && prisma migrate deploy && tsc && vite build",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
