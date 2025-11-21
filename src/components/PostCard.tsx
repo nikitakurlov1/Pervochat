@@ -22,7 +22,7 @@ export default function PostCard({ post, onCommentClick, onUpdate }: PostCardPro
     try {
       const response = await likesAPI.toggle(post.id);
       setIsLiked(response.data.liked);
-      setLikesCount(prev => response.data.liked ? prev + 1 : prev - 1);
+      setLikesCount((prev: number) => response.data.liked ? prev + 1 : prev - 1);
     } catch (error) {
       console.error('Failed to toggle like', error);
     }

@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, activeTab, onTabChange, showNav = true }: LayoutProps) {
-  const { user, isAdmin } = useAuthStore();
+  const { user } = useAuthStore();
 
   return (
     <div className="layout">

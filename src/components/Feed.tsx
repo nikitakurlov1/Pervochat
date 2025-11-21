@@ -16,7 +16,8 @@ export default function Feed() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'recent' | 'popular'>('recent');
 
-  const fetchPosts = async (silent = false) => {
+  const fetchPosts = async (eventOrSilent?: React.MouseEvent | boolean) => {
+    const silent = typeof eventOrSilent === 'boolean' ? eventOrSilent : false;
     if (!silent) setLoading(true);
     try {
       const response = await postsAPI.getAll();
