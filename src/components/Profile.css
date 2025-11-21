@@ -1,0 +1,130 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1c1e21;
+  margin-bottom: 2px;
+}
+
+.profile-email {
+  font-size: 13px;
+  color: #65676b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-meta {
+  font-size: 12px;
+  color: #65676b;
+  margin-top: 4px;
+}
+
+.btn-logout {
+  padding: 8px 12px;
+  background: #f0f2f5;
+  color: #65676b;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-logout:hover {
+  background: #e4e6eb;
+  color: #ef4444;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #f0f2f5;
+  padding: 14px 12px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1c1e21;
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #65676b;
+  font-weight: 500;
+}
+
+.profile-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c1e21;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.btn-trustbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-trustbox:hover {
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+.profile .empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #65676b;
+  font-size: 14px;
+}
