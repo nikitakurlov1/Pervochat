@@ -4,6 +4,7 @@
   "description": "School Messenger SPA",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev:same-origin": "tsx server/index.ts",
     "server": "tsx watch server/index.ts",
     "client": "vite",
     "build": "tsc && vite build",
