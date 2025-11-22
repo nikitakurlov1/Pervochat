@@ -2,8 +2,15 @@ import axios from 'axios';
 
 const isProduction = import.meta.env.PROD;
 
+// Prefer explicit runtime API base set via Vite env var `VITE_API_BASE_URL`.
+// Example (Vercel): set VITE_API_BASE_URL=https://api.example.com
+const configuredBase = (import.meta.env as Record<string, any>).VITE_API_BASE_URL;
+const baseURL = configuredBase
+  ? `${configuredBase.replace(/\/$/, '')}/api`
+  : '/api';
+
 const api = axios.create({
-  baseURL: isProduction ? 'https://pervocha.vercel.app/api' : '/api',
+  baseURL,
   withCredentials: true
 });
 
