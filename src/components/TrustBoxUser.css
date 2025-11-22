@@ -128,7 +128,7 @@
 .messages-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .message-card {
@@ -145,13 +145,13 @@
 
 .user-message {
   background: #f0f2f5;
-  align-self: flex-start;
+  align-self: flex-end; /* user on the right */
 }
 
 .admin-message {
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
-  align-self: flex-end;
+  align-self: flex-start; /* admin on the left */
 }
 
 .message-label {

@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
+const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 } // 10MB
 });
@@ -65,11 +65,11 @@ router.post('/', authMiddleware, upload.fields([
   try {
     const { category, text, pollQuestion, pollOptions, youtubeUrl, linkPreview } = req.body;
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-    
+
     // Обробляємо кілька фото
     const imageUrls = files?.images?.map(img => `/uploads/${img.filename}`) || [];
     const imageUrlsString = imageUrls.length > 0 ? JSON.stringify(imageUrls) : null;
-    
+
     const fileUrl = files?.file?.[0] ? `/uploads/files/${files.file[0].filename}` : null;
     const fileName = files?.file?.[0] ? files.file[0].originalname : null;
 
@@ -123,7 +123,7 @@ router.delete('/:id', authMiddleware, async (req: AuthRequest, res) => {
 
     // Отримуємо інформацію про користувача
     const user = await prisma.user.findUnique({ where: { id: req.userId } });
-    
+
     // Перевіряємо: або автор, або адмін
     if (post.userId !== req.userId && user?.role !== 'ADMIN') {
       return res.status(403).json({ error: 'Unauthorized' });

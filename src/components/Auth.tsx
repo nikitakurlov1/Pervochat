@@ -22,7 +22,13 @@ export default function Auth() {
       
       setAuth(response.data.token, response.data.user);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Помилка автентифікації');
+        // Normalize error message: API may return string or object { code, message }
+        const apiError = err?.response?.data?.error;
+        let message = 'Помилка автентифікації';
+        if (typeof apiError === 'string') message = apiError;
+        else if (apiError && typeof apiError === 'object') message = apiError.message || JSON.stringify(apiError);
+        else if (err?.message) message = err.message;
+        setError(message);
     }
   };
 

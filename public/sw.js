@@ -44,21 +44,40 @@ self.addEventListener('activate', (event) => {
 
 // Fetch - стратегія Network First, потім Cache
 self.addEventListener('fetch', (event) => {
+  const req = event.request;
+
+  // Don't attempt to cache non-GET requests (POST/PUT/DELETE etc.)
+  if (req.method !== 'GET') {
+    event.respondWith(
+      fetch(req).catch(() => {
+        // If navigation fails (user tried to open a page), return cached index.html
+        if (req.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+        // Generic service unavailable response for other non-GET requests
+        return new Response(null, { status: 503, statusText: 'Service Unavailable' });
+      })
+    );
+    return;
+  }
+
+  // For GET requests use network-first, fallback to cache
   event.respondWith(
-    fetch(event.request)
+    fetch(req)
       .then((response) => {
-        // Якщо отримали відповідь, кешуємо її
         if (response && response.status === 200) {
           const responseToCache = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
+            cache.put(req, responseToCache).catch((err) => {
+              // Avoid uncaught errors when cache.put is unsupported for this request
+              console.warn('Failed to cache response for', req.url, err);
+            });
           });
         }
         return response;
       })
       .catch(() => {
-        // Якщо мережа недоступна, беремо з кешу
-        return caches.match(event.request);
+        return caches.match(req).then((cached) => cached || caches.match('/index.html'));
       })
   );
 });

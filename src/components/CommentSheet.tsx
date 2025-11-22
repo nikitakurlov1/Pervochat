@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { commentsAPI } from '../api/api';
 import './CommentSheet.css';
@@ -11,15 +11,31 @@ interface CommentSheetProps {
 
 export default function CommentSheet({ post, onClose, onCommentAdded }: CommentSheetProps) {
   const [text, setText] = useState('');
+  const [comments, setComments] = useState<any[]>(post.comments || []);
+  const listRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // If parent updates post (e.g., after refetch), sync local comments
+    setComments(post.comments || []);
+  }, [post]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
 
     try {
-      await commentsAPI.create(post.id, text);
+      const res = await commentsAPI.create(post.id, text);
+      // Append the new comment immediately
+      setComments((prev) => [...prev, res.data]);
       setText('');
+      // Notify parent to refresh in background
       onCommentAdded();
+      // Scroll to bottom to reveal the new comment
+      requestAnimationFrame(() => {
+        if (listRef.current) {
+          listRef.current.scrollTop = listRef.current.scrollHeight;
+        }
+      });
     } catch (error) {
       console.error('Failed to add comment', error);
     }
@@ -34,11 +50,11 @@ export default function CommentSheet({ post, onClose, onCommentAdded }: CommentS
             <X size={20} />
           </button>
         </div>
-        <div className="comments-list">
-          {post.comments.length === 0 ? (
+        <div className="comments-list" ref={listRef}>
+          {comments.length === 0 ? (
             <p className="no-comments">Поки немає коментарів. Будьте першим!</p>
           ) : (
-            post.comments.map((comment: any) => (
+            comments.map((comment: any) => (
               <div key={comment.id} className="comment">
                 <div className="comment-author">{comment.user.username}</div>
                 <div className="comment-text">{comment.text}</div>

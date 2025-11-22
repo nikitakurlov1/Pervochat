@@ -17,7 +17,10 @@ export default function TrustBoxUser({ onClose }: TrustBoxUserProps) {
   const fetchMessages = async (silent = false) => {
     try {
       const response = await trustBoxAPI.getMy();
-      setMessages(response.data);
+      const sorted = [...response.data].sort(
+        (a: any, b: any) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+      setMessages(sorted);
     } catch (error) {
       console.error('Failed to fetch messages', error);
     } finally {

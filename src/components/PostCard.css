@@ -5,7 +5,48 @@
   margin-bottom: 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   border: 1px solid #e4e6eb;
-  transition: all 0.2s ease;
+  transition: box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+
+/* Accessible highlight + selected state */
+.post-card:focus-within,
+.post-card:focus,
+.post-card.selected {
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 0 0 4px rgba(99, 102, 241, 0.06);
+  transform: translateY(-2px);
+}
+
+/* subtle left accent bar for selected/highlighted cards */
+.post-card.selected::before,
+.post-card:focus-within::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.9));
+}
+
+/* make sure the pseudo element is visible by giving the card positioning context */
+.post-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .post-card,
+  .post-card:hover,
+  .post-card:focus-within,
+  .post-card.selected {
+    transition: none;
+    transform: none;
+  }
 }
 
 /* Desktop hover effect */
@@ -154,23 +195,28 @@
 
 .post-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   padding-top: 10px;
   border-top: 1px solid #e4e6eb;
+  align-items: stretch;
 }
 
 .btn-action {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
   background: #f0f2f5;
   font-size: 13px;
-  font-weight: 500;
-  color: #65676b;
+  font-weight: 600;
+  color: #1c1e21;
   transition: all 0.2s ease;
-  min-height: 44px; /* Мінімальна висота для зручного натискання на мобільних */
+  min-height: 44px;
+  /* Зручно на мобільних */
+  flex: 1;
+  /* рівна ширина для двох кнопок */
 }
 
 /* Mobile - active effect */
@@ -182,8 +228,10 @@
 /* Desktop - hover effect */
 @media (min-width: 768px) {
   .btn-action {
-    min-height: auto;
-    padding: 7px 12px;
+    min-height: 36px;
+    padding: 6px 10px;
+    flex: 0 0 auto;
+    /* компактні кнопки на десктопі */
   }
 
   .btn-action:hover {
