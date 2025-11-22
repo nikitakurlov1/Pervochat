@@ -26,8 +26,21 @@ async function main() {
   if (!isProd) {
     // In development use Vite's middleware so frontend and backend are served from the same origin (port 3000)
     const { createServer: createViteServer } = await import('vite');
+    // Explicit HMR configuration so the client knows which websocket to connect to
+    // When running the combined Express+Vite dev server on localhost:3000 we
+    // want the HMR websocket client to connect to the same origin.
     const vite = await createViteServer({
-      server: { middlewareMode: 'html' },
+      server: {
+        middlewareMode: 'html',
+        hmr: {
+          protocol: 'ws',
+          host: 'localhost',
+          // Vite will start its internal WS server; choose a port that is free.
+          // Default is typically 24678 — we explicitly set it so the client connects correctly.
+          port: 24678,
+          clientPort: 24678
+        }
+      },
       appType: 'custom'
     } as any);
     app.use(vite.middlewares);
